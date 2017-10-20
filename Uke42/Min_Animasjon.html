@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Min animasjon</title>
+
+    <style>
+        
+        @keyframes turnhead {
+           to {
+               background-position:0 -8000px
+           }
+        }
+        
+        .mann {
+            background-image: url("ANIMASJONS OPPGAVE FERDIG-01.png");
+            width: 500px;
+            height: 500px;
+            animation: turnhead 2.5s steps(16) infinite;
+            border-radius: 15%;
+        }
+
+        body {
+            margin: 0;
+            background-color: orange;
+            padding: 170px 500px 170px;
+        }
+    </style>
+    
+
+</head>
+<body>
+    <div class="mann"></div>
+</body>
+</html>
