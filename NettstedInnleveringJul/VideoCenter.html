@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VC</title>
+    <style>
+
+        * {
+            margin: 0;
+        }
+        body {
+            background-color: lightblue;
+        }
+        #cb {
+            display: none;
+        }
+        #burger {
+            width: 16px;
+            height: 16px;
+            margin-top: 5px;
+            margin-left: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        #burger > div {
+            background-color: teal;
+            height: 2px;
+            transition: 0.3s;
+        }
+        #menu {
+            width: 300px;
+            background-color: teal;
+            position: absolute;
+            top: 32px;
+            left: -300px;
+            min-height: calc(100vh - 64px);
+            transition: 0.5s;
+            text-align: center;
+            padding-top: 40px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+        #cb:checked ~ #menu {
+            left: 0;
+        }
+        #cb:checked ~ #burger > div:first-child {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #cb:checked ~ #burger > div:nth-child(2) {
+            opacity: 0;
+        }
+        #cb:checked ~ #burger > div:last-child {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        nav a {
+            text-decoration: none;
+            font-family: Impact;
+            color: white;
+            font-size: 30px;
+        }
+        header {
+            text-align: center;
+            font-family: Impact;
+            font-size: 40px;
+            color: teal;
+            filter: drop-shadow(3px 2px 3px white);
+        }
+        main {
+            overflow: hidden;
+            background-color: lightblue;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 100vh;
+            position: relative;
+        }
+        .slides {
+            width: 500%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            transition: 1s;
+        }
+        .slides > div {
+            text-align: center;
+        }
+        .slides > div > img {
+            width: 80%;
+        }
+        #knapp1 {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+        }
+        #knapp2 {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+        }
+        h1 {
+            text-align: center;
+            font-family: Impact;
+            font-size: 30px;
+            color: white;
+            filter: drop-shadow(3px 2px 3px teal);
+        }
+        p {
+            text-align: center;
+            font-family: Impact;
+            font-size: 20px;
+            color: teal;
+        }
+
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="cb">
+    <label id="burger" for="cb">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+    <nav id="menu">
+        <a href="Failarmy.html">FAILS</a>
+        <br>
+        <br>
+        <a href="People_are_awesome.html">AWESOME</a>
+        <br>
+        <br>
+        <a href="Cartoons.html">CARTOONS</a>
+        <br>
+        <br>
+        <a href="About(innlevering).html">ABOUT US</a>
+    </nav>
+        <header>
+            VIDEOCENTER
+        <div>
+            <img src="VC%20logo2.png" height="80" width="80">
+        </div>
+        </header>
+        <main>
+            <h1>
+                Videos Of The Week
+            </h1>
+            <div class="slides">
+                <div>
+                    <img src="car%20crash.jpg" alt="">
+                    <p>
+                        (Awesome)
+                    </p>
+                </div>
+                <div>
+                    <img src="car%20crash.jpg" alt="">
+                    <p>
+                        (Fails)
+                    </p>
+                </div>
+                <div>
+                    <img src="../Uke48/img3.jpg" alt="">
+                    <p>
+                        (Cartoons)
+                    </p>
+                </div>
+                <div>
+                    <img src="../Uke48/img4.jpg" alt="">
+                    <p>
+                        (Fails)
+                    </p>
+                </div>
+                <div>
+                    <img src="../Uke48/img5.jpg" alt="">
+                </div>
+            </div>
+
+            <div id="knapp1">nefkn</div>
+            <div id="knapp2">fejf</div>
+
+        </main>
+
+        <script>
+        let slides = document.querySelector(".slides");
+        let marg = 0;
+
+        function forover() {
+
+            if(marg > -400) {
+                marg = marg - 100;
+                slides.style.marginLeft =  marg + "%";
+            } else {
+                slides.animate([
+                    {transform: "translateX(20px)"},
+                    {transform: "translateX(0)"},
+                    {transform: "translateX(15px)"},
+                    {transform: "translateX(0)"}
+                ], {
+                    duration: 200
+                });
+            }
+        }
+        function bakover() {
+
+            if(marg < 0) {
+                marg = marg + 100;
+                slides.style.marginLeft = marg + "%";
+            }else {
+                slides.animate([
+                    {transform: "translateX(-20px)"},
+                    {transform: "translateX(0)"},
+                    {transform: "translateX(-15px)"},
+                    {transform: "translateX(0)"}
+                ], {
+                    duration: 200
+                });
+            }
+        }
+        document.onclick = function(klikk) {
+            if(klikk.clientX > innerWidth / 2) {
+                forover();
+            } else {
+                bakover();
+            }
+        }
+
+        setInterval(forover, 3500);
+
+    </script>
+
+
+    https://www.youtube.com/watch?v=PLtvd1OC5tY&t=19s
+
+</body>
+</html>

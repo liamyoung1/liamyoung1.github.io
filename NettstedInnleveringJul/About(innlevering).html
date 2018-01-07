@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <style>
+        body {
+            background-image: url("business-meeting.jpg");
+            background-size: cover;
+            margin: 0;
+        }
+        body > nav {
+            display: grid;
+            grid-auto-flow: column;
+            text-align: center;
+            background-color: lightslategray;
+        }
+        body > nav > a {
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            font-family: Sans-Serif;
+            font-size: 20px;
+            border-top: 2px solid gainsboro;
+            border-bottom: 2px solid gainsboro;
+        }
+        nav > a:hover {
+            background-color: lightgreen;
+            transition: 0.5s;
+        }
+        nav > a.active {
+            background-color: lightgreen;
+        }
+        footer {
+            text-align: center;
+            padding-top: 500px;
+
+        }
+        body > footer > div > a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: white;
+            font-size: 25px;
+            filter: drop-shadow(3px 2px 3px black);
+        }
+        body > main {
+            font-family: sans-serif;
+            color: black;
+            filter: drop-shadow(3px 2px 3px white);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="Failarmy.html" >FAILS</a>
+        <a href="People_are_awesome.html">AWESOME</a>
+        <a href="VideocenterV2.html">HOME</a>
+        <a href="Cartoons.html">CARTOONS</a>
+        <a href="About(innlevering).html" id="1" class="active">ABOUT</a>
+    </nav>
+
+    <main>
+        Videocenter is a site where you can see all your favortie short films.
+        <br>
+        We work hard to find the best videos for you to enjoy.
+        <br>
+        We bring you a wide selection, from fails to cartoons.
+    </main>
+</body>
+</html>
