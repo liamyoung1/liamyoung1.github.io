@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VC</title>
+    <style>
+
+        * {
+            margin: 0;
+        }
+        body {
+            background-image: url("skydive2.jpg");
+            background-size: cover;
+        }
+        #cb {
+            display: none;
+        }
+        #burger {
+            width: 16px;
+            height: 16px;
+            margin-top: 5px;
+            margin-left: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        #burger > div {
+            background-color: white;
+            filter: drop-shadow(2px 2px 2px forestgreen);
+            height: 2px;
+            transition: 0.3s;
+        }
+        #menu {
+            width: 300px;
+            background-color: lightgreen;
+            position: absolute;
+            top: 32px;
+            left: -300px;
+            min-height: calc(100vh - 64px);
+            transition: 0.5s;
+            text-align: center;
+            padding-top: 40px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        #cb:checked ~ #menu {
+            left: 0;
+        }
+        #cb:checked ~ #burger > div:first-child {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #cb:checked ~ #burger > div:nth-child(2) {
+            opacity: 0;
+        }
+        #cb:checked ~ #burger > div:last-child {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        nav a {
+            text-decoration: none;
+            font-family: Impact;
+            color: white;
+            font-size: 30px;
+        }
+        header {
+            text-align: center;
+            font-family: Impact;
+            font-size: 65px;
+            color: white;
+            filter: drop-shadow(3px 2px 3px forestgreen);
+        }
+        main {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 100vh;
+            position: relative;
+        }
+        .slides > div {
+            text-align: center;
+        }
+        .slides > div > img {
+            width: 80%;
+        }
+
+    </style>
+</head>
+<body>
+
+<input type="checkbox" id="cb">
+        <label id="burger" for="cb">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+        <nav id="menu">
+            <a href="Failarmy.html">FAILS</a>
+            <br>
+            <br>
+            <a href="People_are_awesome.html">AWESOME</a>
+            <br>
+            <br>
+            <a href="Cartoons.html">CARTOONS</a>
+            <br>
+            <br>
+            <a href="About(innlevering).html">ABOUT</a>
+        </nav>
+
+    <header>
+        VIDEOCENTER
+    </header>
+
+    <main>
+        <img src="VC%20logo2.png" alt="">
+    </main>
+</body>
+</html>
