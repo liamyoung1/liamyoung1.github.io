@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsroom</title>
+</head>
+<body>
+
+    <main id="main"></main>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCPUGC6nSs45ZoJR6P9n4qX2ozcXZVnkds",
+            authDomain: "newsroom-f5dbe.firebaseapp.com",
+            databaseURL: "https://newsroom-f5dbe.firebaseio.com",
+            projectId: "newsroom-f5dbe",
+            storageBucket: "newsroom-f5dbe.appspot.com",
+            messagingSenderId: "580880791622"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        const db = firebase.database();
+        const nyheter = db.ref("newsroom/sport");
+
+        const main = document.getElementById("main");
+
+
+        function visNyheter(snap){
+            let nyhet = snap.val();
+
+            main.innerHTML = `
+                <article>
+                    <img src="${nyhet.bilde}">
+                    <h1>${nyhet.overskrift}</h1>
+                    <h2>${nyhet.ingress}</h2>
+                    <p>${nyhet.tekst}</p>
+                </article>
+            ` + main.innerHTML;
+
+        }
+
+        nyheter.on("child_added", visNyheter);
+
+
+    </script>
+</body>
+</html>

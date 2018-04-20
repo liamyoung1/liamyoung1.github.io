@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrer Nyhet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+
+        body {
+
+        }
+
+        main {
+            padding: 10px;
+            max-width: 770px;
+            margin: auto;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+    </style>
+</head>
+<body>
+
+<main>
+
+
+    <form id="skjema">
+        <label>Overskrift</label>
+        <input type="text" required id="inpOverskrift">
+        <label>Ingress</label>
+        <input type="text" required id="inpIngress">
+        <label>Bilde</label>
+        <input type="text" required id="inpBilde">
+        <select required id="selKategori">
+            <option value="">Velg kategori</option>
+            <option value="sport">Sport</option>
+            <option value="musikk">Musikk</option>
+            <option value="sport">Sport</option>
+            <option value="sport">Sport</option>
+            <option value="sport">Sport</option>
+        </select>
+        <textarea name="Tekst" id="taTekst"></textarea>
+        <button type="submit" class="button expanded">Registrer</button>
+    </form>
+</main>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCPUGC6nSs45ZoJR6P9n4qX2ozcXZVnkds",
+        authDomain: "newsroom-f5dbe.firebaseapp.com",
+        databaseURL: "https://newsroom-f5dbe.firebaseio.com",
+        projectId: "newsroom-f5dbe",
+        storageBucket: "newsroom-f5dbe.appspot.com",
+        messagingSenderId: "580880791622"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+    const db = firebase.database();
+
+    const inpOverskrift = document.getElementById("inpOverskrift");
+    const inpBilde = document.getElementById("inpBilde");
+    const inpIngress = document.getElementById("inpIngress");
+    const selKategori = document.getElementById("selKategori");
+    const taTekst = document.getElementById("taTekst");
+    const skjema = document.getElementById("skjema");
+
+    function registrerNyhet(evt){
+        evt.preventDefault();
+        const nyheter = db.ref("newsroom/" + selKategori.value);
+
+        nyheter.push({
+            overskrift: inpOverskrift.value,
+            bilde: inpBilde.value,
+            ingress: inpIngress.value,
+            tekst: taTekst.value,
+            time: firebase.database.ServerValue.TIMESTAMP
+
+        });
+
+        skjema.reset();
+    }
+
+    skjema.onsubmit = registrerNyhet;
+
+
+</script>
+</body>
+</html>

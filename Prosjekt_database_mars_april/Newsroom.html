@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsroom</title>
+
+    <style>
+
+        header {
+            display: grid;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+
+        }
+        main {
+            background-color: black;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        header > nav {
+            border-bottom: 1px solid white;
+            border-top: 1px solid white;
+            background-color: #1779ba;
+
+        }
+
+        header > section {
+            display: grid;
+            grid-template-columns: 1fr auto;
+        }
+
+
+        header #searchdiv {
+            background-color: #eeeeee;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        header > section > input {
+            padding: 1rem;
+
+        }
+        header > nav {
+            font-size: 0;
+        }
+        header > nav > a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 15px;
+            font-size: 16px;
+            color: white;
+            font-family: Constantia;
+            font-size: 20px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <section>
+            <img width="200" src="newsroom.png" alt="">
+            <div id="searchdiv">
+                <input type="text">
+            </div>
+
+        </section>
+            <nav>
+                <a href="#">Sport</a>
+                <a href="#">Musikk</a>
+                <a href="#">Kultur</a>
+                <a href="#">Poitikk</a>
+                <a href="#">Sport</a>
+                <a href="#">Sport</a>
+                <a href="#">Sport</a>
+            </nav>
+    </header>
+
+
+
+    <main>
+        <div>
+            <img src="" alt="">
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+    </main>
+
+    <footer>
+        ekfnehjhjhjhjh hjhj
+    </footer>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCPUGC6nSs45ZoJR6P9n4qX2ozcXZVnkds",
+            authDomain: "newsroom-f5dbe.firebaseapp.com",
+            databaseURL: "https://newsroom-f5dbe.firebaseio.com",
+            projectId: "newsroom-f5dbe",
+            storageBucket: "newsroom-f5dbe.appspot.com",
+            messagingSenderId: "580880791622"
+        };
+        firebase.initializeApp(config);
+    </script>
+</body>
+</html>
