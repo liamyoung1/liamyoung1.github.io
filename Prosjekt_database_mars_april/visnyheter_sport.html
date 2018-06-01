@@ -3,8 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Newsroom</title>
+
+    <link rel="stylesheet" href="main.css">
+
 </head>
 <body>
+
+    <header>
+
+        <a href="Newsroom.html" title="Hjem" id="logo">
+            <img width="200" src="newsroom.png" alt="logo">
+        </a>
+
+
+        <nav>
+            <a href="visnyheter_sport.html" id="1" class="active">Sport</a>
+            <a href="visnyheter_musikk.html">Musikk</a>
+            <a href="visnyheter_kultur.html">Kultur</a>
+            <a href="visnyheter_politikk.html">Politikk</a>
+        </nav>
+
+
+        <div class="pluss">
+            <a href="registrer_nyhet.html" title="Registrer en nyhet">+</a>
+        </div>
+
+    </header>
 
     <main id="main"></main>
 
@@ -36,10 +60,12 @@
 
             main.innerHTML = `
                 <article>
-                    <img src="${nyhet.bilde}">
-                    <h1>${nyhet.overskrift}</h1>
-                    <h2>${nyhet.ingress}</h2>
-                    <p>${nyhet.tekst}</p>
+                    <a href="${nyhet.url}">
+                        <img src="${nyhet.bilde}">
+                        <h1>${nyhet.overskrift}</h1>
+                        <P>${nyhet.ingress}</P>
+
+                    </a>
                 </article>
             ` + main.innerHTML;
 

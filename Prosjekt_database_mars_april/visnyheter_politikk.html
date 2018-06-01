@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsroom</title>
+
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+
+<header>
+
+    <a href="Newsroom.html" title="Hjem" id="logo">
+        <img width="200" src="newsroom.png" alt="logo">
+    </a>
+
+
+    <nav>
+        <a href="visnyheter_sport.html">Sport</a>
+        <a href="visnyheter_musikk.html">Musikk</a>
+        <a href="visnyheter_kultur.html">Kultur</a>
+        <a href="visnyheter_politikk.html" id="1" class="active">Politikk</a>
+    </nav>
+
+
+    <div class="pluss">
+        <a href="registrer_nyhet.html" title="Registrer en nyhet">+</a>
+    </div>
+
+</header>
+
+<main id="main"></main>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCPUGC6nSs45ZoJR6P9n4qX2ozcXZVnkds",
+        authDomain: "newsroom-f5dbe.firebaseapp.com",
+        databaseURL: "https://newsroom-f5dbe.firebaseio.com",
+        projectId: "newsroom-f5dbe",
+        storageBucket: "newsroom-f5dbe.appspot.com",
+        messagingSenderId: "580880791622"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+
+    const db = firebase.database();
+    const nyheter = db.ref("newsroom/politikk");
+
+    const main = document.getElementById("main");
+
+
+    function visNyheter(snap){
+        let nyhet = snap.val();
+
+        main.innerHTML = `
+                <article>
+                    <a href="${nyhet.url}">
+                        <img src="${nyhet.bilde}">
+                        <h1>${nyhet.overskrift}</h1>
+                        <P>${nyhet.ingress}</P>
+
+                    </a>
+                </article>
+            ` + main.innerHTML;
+
+    }
+
+    nyheter.on("child_added", visNyheter);
+
+
+
+</script>
+</body>
+</html>

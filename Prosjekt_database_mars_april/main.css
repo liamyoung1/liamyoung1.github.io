@@ -1,0 +1,102 @@
+* {
+    text-decoration: none;
+    color: black;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-size: cover;
+    background-position: left center;
+}
+
+p, h1 {
+    padding: 8px;
+}
+
+header {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    background-color: black;
+    margin-bottom: 10px;
+}
+header > nav > a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 16px;
+    color: white;
+    font-family: Constantia, Sans-Serif;
+    font-size: 20px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding-left: 10px;
+}
+main > article:hover {
+
+}
+
+main article {
+    background-color: lightblue;
+}
+
+main article img {
+    width: 100%;
+}
+
+h1, h2, p {
+    max-width: 100%;
+}
+nav > a:hover {
+    background-color: white;
+    transition: 0.4s;
+    color: black;
+}
+nav > a.active {
+    background-color: white;
+    color: black;
+}
+header #searchdiv {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 100%;
+}
+
+#searchdiv input {
+    padding: 15px;
+    width: 200px;
+    transition: 0.2s;
+    font-size: 18px;
+}
+
+#searchdiv input:focus {
+    width: 340px;
+}
+.pluss {
+    font-family: "Times New Roman", sans-serif;
+    padding: 0 12px;
+    color: white;
+    font-size: 32px;
+}
+
+.pluss a {
+    text-decoration: none;
+    color: white;
+    border: 2px solid deepskyblue;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    background-color: deepskyblue;
+}

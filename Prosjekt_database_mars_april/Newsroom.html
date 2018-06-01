@@ -4,101 +4,60 @@
     <meta charset="UTF-8">
     <title>Newsroom</title>
 
-    <style>
-
-        header {
-            display: grid;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-
-        }
-        main {
-            background-color: black;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-        header > nav {
-            border-bottom: 1px solid white;
-            border-top: 1px solid white;
-            background-color: #1779ba;
-
-        }
-
-        header > section {
-            display: grid;
-            grid-template-columns: 1fr auto;
-        }
-
-
-        header #searchdiv {
-            background-color: #eeeeee;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-        }
-
-        header > section > input {
-            padding: 1rem;
-
-        }
-        header > nav {
-            font-size: 0;
-        }
-        header > nav > a {
-            text-decoration: none;
-            display: inline-block;
-            padding: 5px 15px;
-            font-size: 16px;
-            color: white;
-            font-family: Constantia;
-            font-size: 20px;
-
-        }
-
-    </style>
+    <link rel="stylesheet" href="main.css">
 </head>
+<style>
+
+    @media (max-width: 1000px) {
+        main {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 800px) {
+        main {
+            grid-template-columns: 1fr 1fr;
+        }
+        #logo {
+            display: none;
+        }
+        header nav a {
+            display: block;
+        }
+    }
+    @media (max-width: 620px) {
+        main {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+</style>
 <body>
     <header>
-        <section>
+        <section id="logo">
             <img width="200" src="newsroom.png" alt="">
-            <div id="searchdiv">
-                <input type="text">
-            </div>
 
         </section>
-            <nav>
-                <a href="#">Sport</a>
-                <a href="#">Musikk</a>
-                <a href="#">Kultur</a>
-                <a href="#">Poitikk</a>
-                <a href="#">Sport</a>
-                <a href="#">Sport</a>
-                <a href="#">Sport</a>
-            </nav>
+
+        <nav id="meny">
+            <a href="visnyheter_sport.html">Sport</a>
+            <a href="visnyheter_musikk.html">Musikk</a>
+            <a href="visnyheter_kultur.html">Kultur</a>
+            <a href="visnyheter_politikk.html">Politikk</a>
+        </nav>
+
+        <div id="searchdiv">
+            <input type="text" placeholder="Søk etter nyhetssak" id="inpSearch">
+        </div>
+
+        <div class="pluss">
+           <a href="registrer_nyhet.html" title="Registrer en nyhet">+</a>
+        </div>
+
     </header>
 
 
-
-    <main>
-        <div>
-            <img src="" alt="">
-        </div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-
-    </main>
-
-    <footer>
-        ekfnehjhjhjhjh hjhj
-    </footer>
+    <main id="main"></main>
 
 
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
@@ -114,5 +73,91 @@
         };
         firebase.initializeApp(config);
     </script>
+
+    <script>
+        const db = firebase.database();
+        const sportsnyheter = db.ref("newsroom/sport");
+        const kulturnyheter = db.ref("newsroom/kultur");
+        const politikknyheter = db.ref("newsroom/politikk");
+        const musikknyheter = db.ref("newsroom/musikk");
+
+        const main = document.getElementById("main");
+        const inpSearch = document.getElementById("inpSearch");
+
+
+
+        function visNyheter(snap){
+            let nyhet = snap.val();
+
+            main.innerHTML = `
+            <article>
+                <a href="${nyhet.url}">
+                    <img src="${nyhet.bilde}">
+                    <h1>${nyhet.overskrift}</h1>
+                    <P>${nyhet.ingress}</P>
+
+                </a>
+            </article>
+            ` + main.innerHTML;
+
+        }
+
+        sportsnyheter
+            .orderByChild("time")
+            .limitToLast(3)
+            .on("child_added", visNyheter);
+
+        kulturnyheter
+            .orderByChild("time")
+            .limitToLast(3)
+            .on("child_added", visNyheter);
+
+        politikknyheter
+            .orderByChild("time")
+            .limitToLast(3)
+            .on("child_added", visNyheter);
+
+        musikknyheter
+            .orderByChild("time")
+            .limitToLast(3)
+            .on("child_added", visNyheter);
+
+
+        inpSearch.oninput = function() {
+
+            main.innerHTML = "";
+            kulturnyheter
+                .orderByChild("ingress")
+                .startAt(inpSearch.value)
+                .endAt(inpSearch.value + "\uf8ff")
+                .on("child_added", visNyheter);
+
+            main.innerHTML = "";
+            sportsnyheter
+                .orderByChild("ingress")
+                .startAt(inpSearch.value)
+                .endAt(inpSearch.value + "\uf8ff")
+                .on("child_added", visNyheter);
+
+            main.innerHTML = "";
+            politikknyheter
+                .orderByChild("ingress")
+                .startAt(inpSearch.value)
+                .endAt(inpSearch.value + "\uf8ff")
+                .on("child_added", visNyheter);
+
+            main.innerHTML = "";
+            musikknyheter
+                .orderByChild("ingress")
+                .startAt(inpSearch.value)
+                .endAt(inpSearch.value + "\uf8ff")
+                .on("child_added", visNyheter);
+
+
+        }
+
+
+    </script>
+
 </body>
 </html>

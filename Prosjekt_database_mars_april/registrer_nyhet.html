@@ -6,10 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
     <style>
 
-        body {
-
-        }
-
         main {
             padding: 10px;
             max-width: 770px;
@@ -19,11 +15,60 @@
         textarea {
             height: 80px;
         }
+        header {
+            text-align: center;
+            padding-bottom: 15px;
+        }
+
+        #logo {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+        }
+        #logo > img {
+            width: 180px;
+        }
+
+        h1 {
+            font-size: 22px;
+            padding-top: 7px;
+        }
+
+        #melding {
+            display: none;
+        }
+
+        @media (max-width: 590px) {
+            header {
+                padding-top: 80px;
+            }
+
+            #logo {
+                width: 100%;
+                text-align: center;
+
+            }
+            #logo > img {
+                width: 120px;
+
+            }
+        }
+
 
     </style>
 </head>
 <body>
-
+<header>
+    <h1>Registrer nyhet</h1>
+    <section>
+        <nav>
+            <a href="Newsroom.html">Hjem</a>
+        </nav>
+    </section>
+    <a href="Newsroom.html" id="logo">
+        <img src="newsroom.png" alt="logo">
+    </a>
+</header>
 <main>
 
 
@@ -32,65 +77,79 @@
         <input type="text" required id="inpOverskrift">
         <label>Ingress</label>
         <input type="text" required id="inpIngress">
-        <label>Bilde</label>
+        <label>Url</label>
+        <input type="text" required id="inpUrl">
+        <label>Bilde adresse</label>
         <input type="text" required id="inpBilde">
         <select required id="selKategori">
             <option value="">Velg kategori</option>
             <option value="sport">Sport</option>
             <option value="musikk">Musikk</option>
-            <option value="sport">Sport</option>
-            <option value="sport">Sport</option>
-            <option value="sport">Sport</option>
+            <option value="kultur">Kultur</option>
+            <option value="politikk">Politikk</option>
         </select>
-        <textarea name="Tekst" id="taTekst"></textarea>
+
         <button type="submit" class="button expanded">Registrer</button>
     </form>
+    <article id="melding" class="callout success">
+        <p>Nyheten din er nå registrert</p>
+    </article>
+
 </main>
 
 
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyCPUGC6nSs45ZoJR6P9n4qX2ozcXZVnkds",
-        authDomain: "newsroom-f5dbe.firebaseapp.com",
-        databaseURL: "https://newsroom-f5dbe.firebaseio.com",
-        projectId: "newsroom-f5dbe",
-        storageBucket: "newsroom-f5dbe.appspot.com",
-        messagingSenderId: "580880791622"
-    };
-    firebase.initializeApp(config);
-</script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCPUGC6nSs45ZoJR6P9n4qX2ozcXZVnkds",
+            authDomain: "newsroom-f5dbe.firebaseapp.com",
+            databaseURL: "https://newsroom-f5dbe.firebaseio.com",
+            projectId: "newsroom-f5dbe",
+            storageBucket: "newsroom-f5dbe.appspot.com",
+            messagingSenderId: "580880791622"
+        };
+        firebase.initializeApp(config);
+    </script>
 
-<script>
-    const db = firebase.database();
+    <script>
+        const db = firebase.database();
 
-    const inpOverskrift = document.getElementById("inpOverskrift");
-    const inpBilde = document.getElementById("inpBilde");
-    const inpIngress = document.getElementById("inpIngress");
-    const selKategori = document.getElementById("selKategori");
-    const taTekst = document.getElementById("taTekst");
-    const skjema = document.getElementById("skjema");
-
-    function registrerNyhet(evt){
-        evt.preventDefault();
-        const nyheter = db.ref("newsroom/" + selKategori.value);
-
-        nyheter.push({
-            overskrift: inpOverskrift.value,
-            bilde: inpBilde.value,
-            ingress: inpIngress.value,
-            tekst: taTekst.value,
-            time: firebase.database.ServerValue.TIMESTAMP
-
-        });
-
-        skjema.reset();
-    }
-
-    skjema.onsubmit = registrerNyhet;
+        const inpOverskrift = document.getElementById("inpOverskrift");
+        const inpBilde = document.getElementById("inpBilde");
+        const inpIngress = document.getElementById("inpIngress");
+        const selKategori = document.getElementById("selKategori");
+        const melding = document.getElementById("melding");
 
 
-</script>
+        const skjema = document.getElementById("skjema");
+        const inpUrl = document.getElementById("inpUrl");
+
+
+        function registrerNyhet(evt){
+            evt.preventDefault();
+            const nyheter = db.ref("newsroom/" + selKategori.value);
+
+            nyheter.push({
+                overskrift: inpOverskrift.value,
+                url: inpUrl.value,
+                bilde: inpBilde.value,
+                ingress: inpIngress.value,
+                time: firebase.database.ServerValue.TIMESTAMP
+
+            });
+
+            skjema.reset();
+            melding.style.display = "block";
+
+            setTimeout(function(){
+                melding.style.display = "none";
+            } , 2000)
+        }
+
+        skjema.onsubmit = registrerNyhet;
+
+
+    </script>
 </body>
 </html>
