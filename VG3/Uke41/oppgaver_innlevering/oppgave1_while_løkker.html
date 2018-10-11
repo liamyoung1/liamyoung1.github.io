@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>while løkker</title>
+</head>
+<body>
+
+<script>
+    var vinner = 1;
+
+    while (vinner != 10){
+        vinner = Math.floor(Math.random() * 11) + 1;
+        console.log(vinner);
+        if (vinner!==10) document.write(`<p>Du vant ikke!</p>`);
+        if (vinner ==10) document.write(`<p>Du har vunnet!</p>`);
+
+    }
+</script>
+
+</body>
+</html>
