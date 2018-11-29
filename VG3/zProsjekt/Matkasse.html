@@ -3,8 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <title>Matkasse</title>
+    <style>
+        *{
+            font-family: sans-serif;
+        }
+        #hele {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 2fr;
+            width: 100vw;
+            height: 100vh;
+        }
+        #nr1 {
+            background-color: lightcyan;
+        }
+        #nr2 {
+            background-color: lightcyan;
+        }
+        #nr3 {
+            background-color: lightcyan;
+        }
+        #nr4 {
+            background-color: lightcyan;
+        }
+        input {
+            width: 30px;
+            height: 30px;
+        }
+        div > label {
+            font-size: 45px;
+        }
+        header {
+            padding: 50px;
+            font-size: 30px;
+            background-color: darkcyan;
+            color: #eeeeee;
+        }
+        h1 {
+            padding-left: 210px;
+            font-size: 50px;
+        }
+        div > img {
+            padding-left: 125px;
+        }
+        footer {
+            padding-bottom: 100px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
+
+    <header>
+        Kryss av de varene du vil ha og legg til i handlekurven for å gå til bestilling.
+    </header>
+
+    <div id="hele">
+
+
+        <div id="nr1">
+            <div>
+                <h1>Drikke:</h1>
+                <input id="kaffe" type="checkbox">
+                <label for="kaffe">Kaffe</label>
+                <br>
+                <input id="Eplejuice" type="checkbox">
+                <label for="Eplejuice">Eplejuice</label>
+                <br>
+                <input id="Appelsinjuice" type="checkbox">
+                <label for="Appelsinjuice">Appelsinjuice</label>
+                <br>
+                <input id="Melk" type="checkbox">
+                <label for="Melk">Melk</label>
+                <br>
+                <input id="vann" type="checkbox">
+                <label for="vann">Vann</label>
+                <br>
+                <input id="iskaffe" type="checkbox">
+                <label for="iskaffe">Iskaffe</label>
+                <br>
+
+
+            </div>
+        </div>
+        <div id="nr2">
+            <div>
+                <h1>Mat:</h1>
+                <input id="Croissant" type="checkbox">
+                <label for="Croissant">Croissant</label>
+                <br>
+                <input id="Grovbrød" type="checkbox">
+                <label for="Grovbrød">Grovbrød</label>
+                <br>
+                <input id="Loff" type="checkbox">
+                <label for="Loff">Loff</label>
+                <br>
+                <input id="Muffin" type="checkbox">
+                <label for="Muffin">Muffin</label>
+                <br>
+                <input id="egg" type="checkbox">
+                <label for="egg">Egg</label>
+                <br>
+                <input id="bacon" type="checkbox">
+                <label for="bacon">Bacon</label>
+                <br>
+
+            </div>
+        </div>
+        <div id="nr3">
+            <h1>Annet:</h1>
+            <input id="avis" type="checkbox">
+            <label for="avis">Avis</label>
+            <br>
+            <input id="paracet" type="checkbox">
+            <label for="paracet">Paracet</label>
+            <br>
+            <input id="avis" type="checkbox">
+            <label for="avis">Avis</label>
+            <br>
+            <input id="avis" type="checkbox">
+            <label for="avis">Avis</label>
+            <br>
+        </div>
+        <div id="nr4">
+            <h1>Din handlekurv:</h1>
+            <img src="stickynote.png" alt="">
+            <div id="handlekurv"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        <button id="registrerMat">Hei</button>
+    </footer>
+
+    <script>
+
+        var kaffe = document.getElementById("kaffe");
+        var Eplejuice = document.getElementById("Eplejuice");
+        var Appelsinjuice = document.getElementById("Appelsinjuice");
+        var Melk = document.getElementById("Melk");
+        var vann = document.getElementById("vann");
+        var iskaffe = document.getElementById("iskaffe");
+
+        var Croissant = document.getElementById("Croissant");
+        var Grovbrød = document.getElementById("Grovbrød");
+        var Loff = document.getElementById("Loff");
+        var Muffin = document.getElementById("Muffin");
+        var egg = document.getElementById("egg");
+        var bacon = document.getElementById("bacon");
+
+        var avis = document.getElementById("avis");
+        var paracet = document.getElementById("paracet");
+
+        var handlekurv = document.getElementById("handlekurv");
+
+        kaffe.onchange = function () {
+            if(kaffe.checked){
+                handlekurv.innerHTML += "Kaffe";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Eplejuice.onchange = function () {
+            if(Eplejuice.checked){
+                handlekurv.innerHTML += "Eplejuice";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Appelsinjuice.onchange = function () {
+            if(Appelsinjuice.checked){
+                handlekurv.innerHTML += "Appelsinjuice";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Melk.onchange = function () {
+            if(Melk.checked){
+                handlekurv.innerHTML += "Melk";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        vann.onchange = function () {
+            if(vann.checked){
+                handlekurv.innerHTML += "Vann";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        iskaffe.onchange = function () {
+            if(iskaffe.checked){
+                handlekurv.innerHTML += "Iskaffe";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Croissant.onchange = function () {
+            if(Croissant.checked){
+                handlekurv.innerHTML += "Croissant";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Grovbrød.onchange = function () {
+            if(Grovbrød.checked){
+                handlekurv.innerHTML += "Grovbrød";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Loff.onchange = function () {
+            if(Loff.checked){
+                handlekurv.innerHTML += "Loff";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        Muffin.onchange = function () {
+            if(Muffin.checked){
+                handlekurv.innerHTML += "Muffin";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        egg.onchange = function () {
+            if(egg.checked){
+                handlekurv.innerHTML += "Egg";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        bacon.onchange = function () {
+            if(bacon.checked){
+                handlekurv.innerHTML += "Bacon";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        avis.onchange = function () {
+            if(avis.checked){
+                handlekurv.innerHTML += "Avis";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+        paracet.onchange = function () {
+            if(paracet.checked){
+                handlekurv.innerHTML += "Paracet";
+            }
+            else {
+                handlekurv.innerHTML = "";
+            }
+        }
+
+    </script>
 
 </body>
 </html>
