@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oppgave1</title>
+    <style>
+        *{
+            font-family: sans-serif;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<ol id="bokHylle">
+
+</ol>
+
+<script>
+
+    let bokHylle = document.getElementById("bokHylle");
+
+    let boker = ["doppler","harry potter","ringenes herre","kurt blir grusom","hobbiten"];
+
+    for(let bok of boker){
+        bokHylle.innerHTML += "<li>" + bok + "</li>";
+    }
+
+
+    function sortereBokstaver(tekst1,tekst2) {
+        tekst1 = tekst1.toUpperCase();
+        tekst2 = tekst2.toUpperCase();
+        return tekst1 < tekst2;
+    }
+    boker.sort(sortereBokstaver);
+
+
+    function sortereTall(tall1,tall2) {
+        return a-b;
+    }
+
+</script>
+
+</body>
+</html>
