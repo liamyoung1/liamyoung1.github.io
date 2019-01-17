@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oppgave2</title>
+    <style>
+        *{
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <script>
+
+        let trær = document.getElementById("trær");
+
+        let tre = ["lønn","hasel","bjørk","eik","blodlønn","furu","gran"];
+
+        tre.splice(3,3);
+        tre.splice(2,2,"hengebjørk");
+        tre.splice(5,6);
+        tre.push("fjellbjørk");
+        tre.push("dvergbjørk");
+        tre.sort();
+
+        document.write(tre);
+
+
+    </script>
+
+</body>
+</html>
