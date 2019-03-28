@@ -3,38 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Snake</title>
+    <style>
+
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #btn {
+            z-index: 5;
+            position: fixed;
+            left: 64%;
+            top: 30%;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 64px;
+            cursor: pointer;
+        }
+        #overskrift {
+            z-index: 5;
+            position: fixed;
+            left: 64%;
+            top: 1%;
+            font-size: 100px;
+            font-family: sans-serif;
+            color: #4CAF50;
+        }
+        #snakeRekord {
+            z-index: 5;
+            position: fixed;
+            left: 74%;
+            top: 20%;
+        }
+
+    </style>
 </head>
 <body>
-    <canvas id="canvas" width="400" height="300"></canvas>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
 
+    <button id="btn">Play again</button>
+
+    <h1 id="overskrift">SNAKE!</h1>
+    <h1 id="snakeRekord">Rekord</h1>
 
     <script>
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let spillbredde = canvas.width/2;
+        let spillhoyde = canvas.height-120;
+        const btn = document.getElementById("btn");
+        const snakeRekord = document.getElementById("snakeRekord");
 
-        const box = 32;
+
+
+        const box = 100;
 
         // her legger jeg inn bildene mine, eple og bakgrunnen
         const gress = new Image();
-        gress.src = "gress.jpg";
+        gress.src = "gress2.jpg";
 
         const eple = new Image();
         eple.src = "eple.png";
 
+
+        //her lager jeg slangen
         let snake = [];
         snake[0] = {
             x: 9 * box,
             y: 10 * box
-        }
+        };
+        //her legger jeg inn koden for eplet
         let mat = {
-            x: Math.floor(Math.random()*17+1) * box,
-            y: Math.floor(Math.random()*15+3) * box
-        }
+            x: Math.floor(Math.random()*5+1) * box,
+            y: Math.floor(Math.random()*5+3) * box
+        };
 
+        //lager en variabel for poeng
         let score = 0;
 
         let d;
 
+        //her lager jeg kode for å kunne kontrollere slangen
         document.addEventListener("keydown",direction);
         function direction(event) {
             if(event.keyCode == 37 && d != "RIGHT"){
@@ -51,8 +108,11 @@
             }
         }
 
+        //her lager jeg alt det som skal tegnes på canvaset
         function draw() {
-            ctx.drawImage(gress,0,0);
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.drawImage(gress,0,0,canvas.width/2,canvas.height-120);
             for ( let i = 0; i < snake.length ; i++){
                 ctx.fillStyle = ( i == 0)? "green" : "white";
                 ctx.fillRect(snake[i].x,snake[i].y,box,box);
@@ -60,38 +120,81 @@
                 ctx.strokeStyle = "red";
                 ctx.fillRect(snake[i].x,snake[i].y,box,box);
             }
-            ctx.drawImage(eple, mat.x, mat.y);
+            ctx.drawImage(eple, mat.x, mat.y, 70, 70);
 
+            //her lager jeg den gamle posisjonen til slangens hode
             let snakeX =snake[0].x;
             let snakeY =snake[0].y;
 
+            //her lager jeg kode som bestemmer hvilken vei slangen skal gå
+            if(d == "LEFT") snakeX -= box;
+            if(d == "UP") snakeY -= box;
+            if(d == "RIGHT") snakeX += box;
+            if(d == "DOWN") snakeY += box;
 
-            if(d = "LEFT") snakeX -= box;
-            if(d = "UP") snakeY -= box;
-            if(d = "RIGHT") snakeX += box;
-            if(d = "DOWN") snakeY += box;
-
+            //det er dette som skjer hvis slangen spiser eplet
+            console.log(snakeX, mat.x, snakeY, mat.y)
             if(snakeX == mat.x && snakeY == mat.y){
+
                 score++;
                 mat = {
-                    x: Math.floor(Math.random()*17+1) * box,
-                    y: Math.floor(Math.random()*15+3) * box
-                }
+                    x: Math.floor(Math.random()*5+1) * box,
+                    y: Math.floor(Math.random()*5+3) * box
+                } //her fjernes halen
             } else{
-                snake.pop();
+                snake.pop(); //her fjernes ikke halen
             }
 
+            //her gjør jeg slik at slangen stopper når den treffer veggene på venstresiden og slikt at når slangen treffer noen av veggene så stopper spillet og en varsel kommer opp at du har tapt
+            ctx.fillStyle = snake.farge;
+            ctx.fillRect(snakeX, snakeY, snake.bredde, snake.hoyde);
+            console.log(snakeX + box, spillbredde);
+            if(snakeX <=-box){
+                snake.xretning = 1;
+                console.log(snakeX);
+                clearInterval(game);
+                setTimeout(function(){ alert("GAME OVER!"); }, 300);
+
+            }
+            if(snakeX >= spillbredde){
+                snake.xretning =-1;
+                clearInterval(game);
+                setTimeout(function(){ alert("GAME OVER!"); }, 300);
+            }
+
+            if(snakeY <=-box){
+                snake.xretning = 1;
+                console.log(snakeX);
+                clearInterval(game);
+                setTimeout(function(){ alert("GAME OVER!"); }, 300);
+            }
+
+            if(snakeY+box > spillhoyde){
+                snake.xretning = 1;
+                console.log(snakeX);
+                clearInterval(game);
+                setTimeout(function(){ alert("GAME OVER!"); }, 300);
+            }
+
+            //her lager jeg nytt hode på slangen
             let nyttHode = {
                 x: snakeX,
                 y: snakeY
             };
             snake.unshift(nyttHode);
 
-            ctx.fillStyle = "white";
+            //her skriver jeg koden for poengsummen
+            ctx.fillStyle = "black";
             ctx.font = "45px Changa one";
-            ctx.fillText(score,2*box,1.6*box);
+            ctx.fillText(score,18*box,2.5*box);
         }
-        let game = setInterval(draw,100);
+        //her gjør jeg slik at draw function går hvert 150 ms
+        let game = setInterval(draw,150);
+
+        //her gjør jeg sånn at når man trykker på play again, så lastes siden på nytt slik at man kan spille på nytt
+        btn.onclick = function () {
+            location.reload();
+        }
 
     </script>
 </body>
